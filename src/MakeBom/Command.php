@@ -161,6 +161,9 @@ class Command extends BaseCommand
         $io->writeError('<info>Generate BOM</info>', true, IOInterface::VERBOSE);
 
         $rootPackage = $composer->getPackage();
+
+        $this->options->foo($rootPackage);
+
         $components = $this->factory->makeLockerFromComposerForOptions($composer, $this->options);
         $rootComponentVersionOverride = $this->options->mainComponentVersion;
 

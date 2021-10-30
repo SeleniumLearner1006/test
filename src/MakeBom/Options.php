@@ -23,9 +23,12 @@ declare(strict_types=1);
 
 namespace CycloneDX\Composer\MakeBom;
 
+use Composer\Package\RootPackage;
+use Composer\Package\RootPackageInterface;
 use CycloneDX\Composer\Factories\SpecFactory;
 use CycloneDX\Composer\MakeBom\Exceptions\ValueError;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -63,10 +66,20 @@ class Options
     ];
 
     /**
-     * @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Command\Command::addOption()} is intended to work this way
+     * @param Command $target
+     *
+     *  @psalm-suppress MissingThrowsDocblock since {@see \Symfony\Component\Console\Command\Command::addOption()} is intended to work this way
+     */
+    private function addOptions($target): void
+    {
+
+    }
+
+    /**
      */
     public function configureCommand(Command $command): void
     {
+        // $command->getNativeDefinition()->
         $command
             ->addOption(
                 self::OPTION_OUTPUT_FORMAT,
@@ -74,7 +87,7 @@ class Options
                 InputOption::VALUE_REQUIRED,
                 'Which output format to use.'.\PHP_EOL.
                 'Values: "'.self::OUTPUT_FORMAT_XML.'", "'.self::OUTPUT_FORMAT_JSON.'"',
-                self::OUTPUT_FORMAT_XML
+                $this->outputFormat
             )
             ->addOption(
                 self::OPTION_OUTPUT_FILE,
@@ -85,7 +98,8 @@ class Options
                 'Depending on the output-format, default is one of: "'.implode(
                     '", "',
                     array_values(self::OUTPUT_FILE_DEFAULT)
-                ).'"'
+                ).'"',
+                $this->outputFile
             )
             ->addOption(
                 self::SWITCH_EXCLUDE_DEV,
@@ -105,7 +119,7 @@ class Options
                 InputOption::VALUE_REQUIRED,
                 'Which version of CycloneDX spec to use.'.\PHP_EOL.
                 'Values: "'.implode('", "', array_keys(SpecFactory::SPECS)).'"',
-                SpecFactory::VERSION_LATEST
+                $this->specVersion
             )
             ->addOption(
                 self::SWITCH_NO_VALIDATE,
@@ -119,13 +133,14 @@ class Options
                 InputOption::VALUE_REQUIRED,
                 'Version of the main component.'.\PHP_EOL.
                 'This will override auto-detection.',
-                null
+                $this->mainComponentVersion
             )
             ->addArgument(
                 self::ARGUMENT_COMPOSER_FILE,
                 InputArgument::OPTIONAL,
                 'Path to composer config file.'.\PHP_EOL.
-                'Defaults to "composer.json" file in working directory.'
+                'Defaults to "composer.json" file in working directory.',
+                $this->composerFile
             );
     }
 
@@ -186,6 +201,17 @@ class Options
      * @psalm-allow-private-mutation
      */
     public $mainComponentVersion;
+
+    public function foo (RootPackageInterface $rootPackage): void
+    {
+        var_dump($rootPackage);
+        $e = $rootPackage->getExtra();
+        var_dump($e);
+
+        new ArrayInput($e);
+
+        exit;
+    }
 
     /**
      * @throws ValueError

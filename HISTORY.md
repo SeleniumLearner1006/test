@@ -17,7 +17,6 @@ All notable changes to this project will be documented in this file.
 [#133]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/133
 [#134]: https://github.com/CycloneDX/cyclonedx-php-composer/pull/134
 
-
 ## 3.5.0 - 2021-10-07
 
 * Changed
