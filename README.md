@@ -1,6 +1,7 @@
 [![shield_gh-workflow-test]][link_gh-workflow-test]
 [![shield_packagist-version]][link_packagist]
-[![shield_license]][license_file]  
+[![shield_license]][license_file] [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSeleniumLearner1006%2Ftest.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSeleniumLearner1006%2Ftest?ref=badge_shield)
+ 
 [![shield_website]][link_website]
 [![shield_slack]][link_slack]
 [![shield_groups]][link_discussion]
@@ -123,3 +124,6 @@ See the [LICENSE][license_file] file for the full license.
 [link_slack]: https://cyclonedx.org/slack/invite
 [link_discussion]: https://groups.io/g/CycloneDX
 [link_twitter]: https://twitter.com/CycloneDX_Spec
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSeleniumLearner1006%2Ftest.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSeleniumLearner1006%2Ftest?ref=badge_large)
